@@ -12,8 +12,8 @@ const NavRoutes = function () {
         <Navbar />
         <Switch>
           <Route exact path="/" component={LivePageContainer}></Route>
-          <Route exact path="/yearly" component={YearlyPage}></Route>
-          <Route exact path="/trends" component={TrendsPage}></Route>
+          {/* <Route exact path="/yearly" component={YearlyPage}></Route>
+          <Route exact path="/trends" component={TrendsPage}></Route> */}
         </Switch>
       </Router>
     </div>
