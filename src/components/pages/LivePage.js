@@ -1,56 +1,50 @@
 import React from 'react';
 import LiveDashboard from '../dashboards/LiveDashboard';
-import Tab from '../menus/Tab'
+import Tab from '../menus/Tab';
 import styled from 'styled-components';
-import { useState } from 'react';
 import CheckIcon from '@mui/icons-material/Check';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import Navbar from '../navbar/Navbar';
-import registeredData from '../../assets/data/live/registered';
-import confirmedData from '../../assets/data/live/confirmed';
-import checkedinData from '../../assets/data/live/checkedin';
+import {
+  LiveDataProvider,
+  useLiveData,
+} from './../../providers/live-data.provider';
 
 const StyledRow = styled.div`
-    display: flex;
-    justify-content: space-evenly;
-    padding-bottom: 1rem;
-    padding-left: 15rem;
-`
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 1rem;
+  padding-left: 15rem;
+`;
 
-const LivePage = function(props){
+const LivePage = function () {
+  const tabButtonProps = {
+    forLabel: ['registered', 'confirmed', 'checkedin'],
+    textLabel: ['Registered', 'Confirmed', 'Checked In'],
+    buttonIcon: [<PersonAddAlt1Icon />, <HowToRegIcon />, <CheckIcon />],
+  };
 
-    const tabButtonProps = {
-        forLabel: ['registered', 'confirmed', 'checkedin'],
-        textLabel: ['Registered', 'Confirmed', 'Checked In'],
-        buttonIcon: [<PersonAddAlt1Icon/>, <HowToRegIcon/>, <CheckIcon/>]
-    };
+  const { dispatch } = useLiveData();
 
-    const [data, setData] = useState('registered');
+  return (
+    <div>
+      <Navbar />
+      <StyledRow>
+        <Tab
+          onClick={(e) => dispatch(e)}
+          tabButtonAttributes={tabButtonProps}
+        ></Tab>
+      </StyledRow>
+      <LiveDashboard />
+    </div>
+  );
+};
 
-    let toRender;
-    if (data === 'registered'){
-        toRender = <LiveDashboard data={registeredData}></LiveDashboard>;
-    }
-    else if (data === 'confirmed'){
-        toRender = <LiveDashboard data={confirmedData} ></LiveDashboard>;
-    }
-    else if (data === 'checkedin'){
-        toRender = <LiveDashboard data={checkedinData}></LiveDashboard>;
-    }
-    else {
-        toRender = <div style={{color: 'white'}}>WELCOME TO THE LIVE DASHBOARD!</div>
-    }
-
-    return(
-        <div>
-            <Navbar/>
-            <StyledRow>
-                <Tab onClick={setData} tabButtonAttributes={tabButtonProps}></Tab>
-            </StyledRow>
-            {toRender}
-        </div>
-    );
+export function LivePageContainer() {
+  return (
+    <LiveDataProvider>
+      <LivePage />
+    </LiveDataProvider>
+  );
 }
-
-export default LivePage;

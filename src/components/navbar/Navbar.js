@@ -1,15 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import NavbarLogo from "../navbar/NavbarLogo";
-import NavbarNav from "../navbar/NavbarNav";
+import React from 'react';
+import NavbarLogo from '../navbar/NavbarLogo';
 
-const Navbar = function(props){
-    return(
-        <div>
-            <NavbarLogo></NavbarLogo>
-            {/* <NavbarNav></NavbarNav> */}
-        </div>
-    );
-}
+const Navbar = function (props) {
+  return (
+    <div>
+      <NavbarLogo></NavbarLogo>
+      {/* <NavbarNav></NavbarNav> */}
+    </div>
+  );
+};
 
 export default Navbar;
