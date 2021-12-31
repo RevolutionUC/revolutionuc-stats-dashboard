@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { LivePageContainer } from '../pages/LivePage';
-import YearlyPage from '../pages/YearlyPage';
-import TrendsPage from '../pages/TrendsPage';
+// import YearlyPage from '../pages/YearlyPage';
+// import TrendsPage from '../pages/TrendsPage';
 import Navbar from '../navbar/Navbar';
 
 const NavRoutes = function () {
