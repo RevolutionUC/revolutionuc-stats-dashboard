@@ -1,11 +1,12 @@
 import React from 'react';
 import NavbarLogo from '../navbar/NavbarLogo';
+import NavbarNav from './NavbarNav';
 
-const Navbar = function (props) {
+const Navbar = function () {
   return (
-    <div>
+    <div style={{ position: `fixed`, zIndex: `99` }}>
       <NavbarLogo></NavbarLogo>
-      {/* <NavbarNav></NavbarNav> */}
+      <NavbarNav></NavbarNav>
     </div>
   );
 };

@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import CheckIcon from '@mui/icons-material/Check';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import Navbar from '../navbar/Navbar';
 import {
   LiveDataProvider,
   useLiveData,
@@ -29,12 +28,8 @@ const LivePage = function () {
 
   return (
     <div>
-      <Navbar />
       <StyledRow>
-        <Tab
-          onClick={(e) => dispatch(e)}
-          tabButtonAttributes={tabButtonProps}
-        ></Tab>
+        <Tab onClick={dispatch} tabButtonAttributes={tabButtonProps}></Tab>
       </StyledRow>
       <LiveDashboard />
     </div>

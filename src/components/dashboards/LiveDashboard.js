@@ -1,14 +1,8 @@
+import { useMemo } from 'react';
 import styled from 'styled-components';
-import BarChartCard from '../cards/charts/BarChartCard';
 import PieChartCard from '../cards/charts/PieChartCard';
-import IconFigureCard from '../cards/figures/IconFigureCard';
+import LineChartCard from '../cards/charts/LineChartCard';
 import BadgeFigureCard from '../cards/figures/BadgeFigureCard';
-import SchoolIcon from '@mui/icons-material/School';
-import FemaleIcon from '@mui/icons-material/Female';
-import PublicIcon from '@mui/icons-material/Public';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import ForumIcon from '@mui/icons-material/Forum';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import { useLiveData } from '../../providers/live-data.provider';
 
 const StyledRow = styled.div`
@@ -29,75 +23,103 @@ const getChartData = (data, key) => {
   };
 };
 
-const LiveDashboard = function () {
-  const { stats } = useLiveData();
+const YESTERDAY = new Date(Date.now() - 24 * 60 * 60 * 1000);
 
-  const schools = stats.schools ? Object.entries(stats.schools) : [];
+const LiveDashboard = function () {
+  const { stats, registrants, latticeStats } = useLiveData();
 
   const ages = getChartData(stats, 'age');
   const genders = getChartData(stats, 'gender');
   const ethnicities = getChartData(stats, 'ethnicity');
+  const schools = getChartData(stats, 'school');
+  const majors = getChartData(stats, 'major');
+  const educationLevels = getChartData(stats, 'educationLevel');
+  const registerDates = getChartData(stats, 'registerDate');
+
+  const last24hrs = useMemo(
+    () => registrants.filter((r) => r.createdAt >= YESTERDAY).length,
+    [registrants],
+  );
 
   return (
     <div>
       <StyledRow>
-        <BadgeFigureCard LabelOne="Registrants" ValueOne={stats.total} />
-        <IconFigureCard
-          cardTitle="Schools"
-          cardValue={schools.length}
-          Icon={<SchoolIcon sx={{ fontSize: 60, color: 'white' }} />}
+        <BadgeFigureCard
+          LabelOne="Registrants"
+          ValueOne={stats.total}
+          LabelTwo="Last 24 hours"
+          ValueTwo={last24hrs}
         />
-        <IconFigureCard
-          cardTitle="Majors"
-          cardValue={1}
-          Icon={<AutoAwesomeIcon sx={{ fontSize: 60, color: 'white' }} />}
-        />
-      </StyledRow>
-
-      <StyledRow>
-        <IconFigureCard
-          cardTitle="Countries"
-          cardValue={1}
-          Icon={<PublicIcon sx={{ fontSize: 60, color: 'white' }} />}
-        />
-        <IconFigureCard
-          cardTitle="Lattice"
-          cardValue={1}
-          Icon={<PeopleAltIcon sx={{ fontSize: 60, color: 'white' }} />}
-        />
-        <IconFigureCard
-          cardTitle="Females"
-          cardValue={1}
-          Icon={<FemaleIcon sx={{ fontSize: 60, color: 'white' }} />}
-        />
-        <IconFigureCard
-          cardTitle="Discord"
-          cardValue={1}
-          Icon={<ForumIcon sx={{ fontSize: 60, color: 'white' }} />}
+        <BadgeFigureCard
+          LabelOne="Lattice Users"
+          ValueOne={latticeStats.visible}
+          LabelTwo="Lattice Matches"
+          ValueTwo={latticeStats.matches}
         />
       </StyledRow>
 
       <StyledRow>
         {ages.data.length ? (
-          <BarChartCard
+          <PieChartCard
             cardTitle="Age"
             labelData={ages.labels}
             seriesData={ages.data}
+            chartType="donut"
           />
         ) : null}
         {genders.data.length ? (
           <PieChartCard
             cardTitle="Genders"
-            chartType={'pie'}
             labelData={genders.labels}
             seriesData={genders.data}
           />
         ) : null}
         {ethnicities.data.length ? (
-          <BarChartCard
+          <PieChartCard
             cardTitle="Ethnicities"
             labelData={ethnicities.labels}
             seriesData={ethnicities.data}
+            chartType="donut"
+          />
+        ) : null}
+      </StyledRow>
+
+      <StyledRow>
+        {schools.data.length ? (
+          <PieChartCard
+            cardTitle="Schools"
+            labelData={schools.labels}
+            seriesData={schools.data}
+          />
+        ) : null}
+        {majors.data.length ? (
+          <PieChartCard
+            cardTitle="Majors"
+            labelData={majors.labels}
+            seriesData={majors.data}
+            chartType="donut"
+          />
+        ) : null}
+        {educationLevels.data.length ? (
+          <PieChartCard
+            cardTitle="Education Levels"
+            labelData={educationLevels.labels}
+            seriesData={educationLevels.data}
+          />
+        ) : null}
+      </StyledRow>
+
+      <StyledRow>
+        {registerDates.data.length ? (
+          <LineChartCard
+            cardTitle="Registered on"
+            labelData={registerDates.labels}
+            seriesData={[
+              {
+                name: 'Registrants',
+                data: registerDates.data,
+              },
+            ]}
           />
         ) : null}
       </StyledRow>

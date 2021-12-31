@@ -1,6 +1,5 @@
 import React from 'react';
 import YearlyDashboard from '../dashboards/YearlyDashboard';
-import Navbar from '../navbar/Navbar';
 import annualData from '../../assets/data/annual/annual';
 // import styled from 'styled-components';
 import Carousel from '../carousel/Carousel';
@@ -18,7 +17,6 @@ import CarouselItem from '../carousel/CarouselItem';
 const YearlyPage = function (props) {
   return (
     <div>
-      <Navbar />
       <Carousel marginTopCarouselItem="-2rem">
         {Object.keys(logosData).map((key, index) => {
           return (

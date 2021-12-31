@@ -13,24 +13,7 @@ const ChartDiv = styled.div`
 
 const LineChartCard = function (props) {
   const [options] = useState({
-    series: [
-      {
-        name: 'Registrants',
-        data: props.seriesData.seriesRegistrants,
-      },
-      {
-        name: 'Participants',
-        data: props.seriesData.seriesParticipants,
-      },
-      {
-        name: 'Submissions',
-        data: props.seriesData.seriesSubmissions,
-      },
-      {
-        name: 'Sponsors',
-        data: props.seriesData.seriesSponsors,
-      },
-    ],
+    series: props.seriesData,
     chart: {
       height: 350,
       type: 'line',
@@ -80,7 +63,7 @@ const LineChartCard = function (props) {
       },
     },
     xaxis: {
-      categories: props.seriesData.seriesHackCategories,
+      categories: props.labelData,
     },
     grid: {
       show: false,
@@ -104,9 +87,6 @@ const LineChartCard = function (props) {
     <div>
       <ThemeProvider theme={theme}>
         <SimpleCard cardTitle={props.cardTitle}>
-          {props.cardLabel}
-          <br></br>
-          {props.cardValue}
           <ChartDiv>
             <Chart
               options={options}

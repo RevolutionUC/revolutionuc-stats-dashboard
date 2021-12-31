@@ -1,55 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import NavButton from '../buttons/NavButton';
-import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { LivePageContainer } from '../pages/LivePage';
 import YearlyPage from '../pages/YearlyPage';
 import TrendsPage from '../pages/TrendsPage';
-import { useState } from 'react';
-
-const StyledRow = styled.div`
-  position: absolute;
-  top: 16rem;
-  left: 2rem;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-`;
+import Navbar from '../navbar/Navbar';
 
 const NavRoutes = function () {
-  const [activeLink, setActiveLink] = useState('Live');
-
   return (
     <div>
       <Router>
-        <StyledRow>
-          <Link to="/" style={{ textDecoration: 'none' }}>
-            <NavButton
-              label="Live"
-              checked={activeLink === 'Live' ? true : false}
-              setData={setActiveLink}
-            ></NavButton>
-          </Link>
-          <Link to="/yearly" style={{ textDecoration: 'none' }}>
-            <NavButton
-              label="Yearly"
-              checked={activeLink === 'Yearly' ? true : false}
-              setData={setActiveLink}
-            ></NavButton>
-          </Link>
-          <Link to="/trends" style={{ textDecoration: 'none' }}>
-            <NavButton
-              label="Trends"
-              checked={activeLink === 'Trends' ? true : false}
-              setData={setActiveLink}
-            ></NavButton>
-          </Link>
-        </StyledRow>
-
+        <Navbar />
         <Switch>
           <Route exact path="/" component={LivePageContainer}></Route>
           <Route exact path="/yearly" component={YearlyPage}></Route>

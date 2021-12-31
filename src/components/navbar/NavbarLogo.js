@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rgba } from 'polished';
-import NavbarNav from './NavbarNav';
 
 const StyledWrapper = styled.div`
   position: absolute;
@@ -9,7 +8,7 @@ const StyledWrapper = styled.div`
   flex: 0 1 auto;
   background: #1b1b1b;
   box-shadow: 0 0 10px ${rgba('black', 0.2)};
-  height: 100%;
+  height: 100vh;
   width: 15rem;
 `;
 
@@ -23,12 +22,6 @@ const StyledBackground = styled.div`
   height: 6.5rem;
   background: #867c48;
 `;
-
-// const StyledLink = styled(Link)`
-//     width: 100%;
-//     padding-left: 1.5rem;
-//     padding-top: 1.5rem;
-// `
 
 const StyledDiv = styled.div`
   width: 100%;
@@ -48,7 +41,7 @@ const StyledSvgBackground = styled.div`
   height: 10rem;
 `;
 
-const NavbarLogo = function (props) {
+const NavbarLogo = function () {
   return (
     <StyledWrapper>
       <StyledBackground />
@@ -60,8 +53,6 @@ const NavbarLogo = function (props) {
             style={{ width: '8rem', height: '8rem' }}
           />
         </StyledSvgBackground>
-
-        <NavbarNav></NavbarNav>
       </StyledDiv>
     </StyledWrapper>
   );

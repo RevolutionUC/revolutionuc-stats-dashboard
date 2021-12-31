@@ -86,7 +86,7 @@ const PieChartCard = function (props) {
             <Chart
               options={options}
               series={options.series}
-              type={props.chartType}
+              type={props.chartType || `pie`}
               height="auto"
               width={props.pieWidth ? props.pieWidth : '100%'}
             />

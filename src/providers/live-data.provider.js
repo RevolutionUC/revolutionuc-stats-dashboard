@@ -17,6 +17,13 @@ const defaultStats = {
   ethnicity: {},
   educationLevel: {},
   hackathonExperience: {},
+  registerDate: {},
+};
+
+const latticeStats = {
+  hackers: 0,
+  visible: 0,
+  matches: 0,
 };
 
 const emptyArray = [];
@@ -27,6 +34,7 @@ const context = createContext({
   registrants: [],
   query: `registered`,
   dispatch: () => {},
+  latticeStats,
 });
 
 const registerUniqueValue = (uniqueValues, name, value) => {
@@ -43,14 +51,22 @@ const registerUniqueValue = (uniqueValues, name, value) => {
 
 const getAgeGroup = (age) => {
   if (age < 18) {
-    return '18-';
+    return '18- yrs';
   } else if (age < 25) {
-    return `${age}`;
-  } else if (age < 35) {
-    return '25-34';
+    return `${age} yrs`;
+  } else if (age < 31) {
+    return '25-30 yrs';
   } else {
-    return '35+';
+    return '30+ yrs';
   }
+};
+
+const getRegisteredDate = (date) => {
+  const dateObj = new Date(date);
+  const month = dateObj.getMonth() + 1;
+  const day = dateObj.getDate();
+
+  return `${month}/${day}`;
 };
 
 export const LiveDataProvider = (props) => {
@@ -71,6 +87,11 @@ export const LiveDataProvider = (props) => {
   const { value: registrants } = useAsync(
     LiveStatsService.getRegistrants,
     emptyArray,
+  );
+
+  const { value: lattice } = useAsync(
+    LiveStatsService.getLatticeStats,
+    latticeStats,
   );
 
   useEffect(() => {
@@ -98,13 +119,20 @@ export const LiveDataProvider = (props) => {
         `hackathonExperience`,
         registrant.hackathonExperience,
       );
+      registerUniqueValue(
+        _stats,
+        `registerDate`,
+        getRegisteredDate(registrant.createdAt),
+      );
     });
 
     setStats(_stats);
   }, [query, registrants]);
 
   return (
-    <context.Provider value={{ stats, registrants, dispatch, query }}>
+    <context.Provider
+      value={{ stats, registrants, dispatch, query, latticeStats: lattice }}
+    >
       {props.children}
     </context.Provider>
   );

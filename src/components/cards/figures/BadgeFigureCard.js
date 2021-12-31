@@ -54,6 +54,13 @@ const BadgeFigureCard = function (props) {
               <Value>{props.ValueOne}</Value>
             </Column>
           </Row>
+          <Row>
+            <ColoredSpan />
+            <Column>
+              <Label>{props.LabelTwo}</Label>
+              <Value>{props.ValueTwo}</Value>
+            </Column>
+          </Row>
         </BadgeCard>
       </ThemeProvider>
     </div>
