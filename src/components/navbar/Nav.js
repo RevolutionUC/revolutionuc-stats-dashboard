@@ -23,51 +23,56 @@ function Nav() {
                 </div>
             </div>
 
-            <style jsx>
-            {`
-                .navigation {
-                    width: 100%,
+            <style jsx>{`
+                .navigation{
+                    width: 100%;
                     height: 50px;
-                    background-color: blue;
+                    // color: red;
                 }
                 
-                .navigation ul {
-                    display: flex;
-                    flex-wrap: wrap;
-                    float: right;
-                    margin: 20 0px;
-                    padding: 0 25px;
-                    background-color: blue;
+                .navigation ul{
+                    display:flex;
+                    flex-direction: column;
+                    float: left;
+                    margin: 0px;
+                    padding: 0px;
+                    // overflow: hidden;
+                    font-size: 2rem;
                 }
-                
-                .navigation ul {
-                    display: ${hamburgerOpen ? 'inline' : 'none'};
-                    background-color: blue;
-                    height: 100vh;
-                    width: 50vw;
-                    margin-top: 50px;
-                    position: absolute;
-                }
-
-                .navigation ul li {
+                .navigation ul li{
                     list-style-type: none;
-                    padding-right: 10px;
+                    padding-right: 20rem;
                 }
-
-                .hamburger {
-                    display: none;
-                }
-
-                @media (max-width: 700px){
-                    .hamburger {
-                        display: fixed;
+                .hamburger{
+                    // display: none;
+                    position: fixed;
+                    right: 2rem;
+                    z-index: 6;
+                } 
+                @media (max-width: 767px){
+                  
+                    .hamburger{
+                        display:fixed;
                         padding-top: 10px;
-                        margin-left: 10px;
-                        z-index: 10;
+                        // margin-left: 1px;
+                        z-index: 6;
+                    }
+                
+                   
+                    .navigation ul{
+                        display: ${hamburgerOpen ? 'inline' : 'none'};
+                        // background-color: blue;
+                        height: 100vh;
+                        width: 50vw;
+                        margin-top: 50px;
+                        position: fixed;
+                        
                     }
                 }
-            `}
-            </style>
+                
+               
+                
+            `}</style>
 
 
 

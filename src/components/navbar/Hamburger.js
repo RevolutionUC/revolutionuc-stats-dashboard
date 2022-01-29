@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Hamburger() {
+function Hamburger( { isOpen } ) {
     return(
         <div className='hamburger'>
             <div className='burger burger1'></div>
@@ -16,6 +16,7 @@ function Hamburger() {
                     justify-content: space-around;
                     flex-flow: column nowrap;
                     z-index: 10;
+                    padding-left: 6rem;
                 }
 
                 .burger {
@@ -26,6 +27,18 @@ function Hamburger() {
                     transform-origin: 1px;
                     transition: all 0.3s linear;
                 }
+                
+                .burger1 {
+                    transform: ${isOpen ? 'rotate(45deg)' : 'rotate(0deg)'};
+                }
+                .burger2 {
+                    transform: ${isOpen ? 'translateX(100%)' : 'translateX(0)'};
+                    opacity: ${isOpen ? 0 : 1};
+                }
+                .burger3 {
+                    transform: ${isOpen ? 'rotate(-45deg)' : 'rotate(0)'};
+                }
+                
             `}
             </style>
         </div>
