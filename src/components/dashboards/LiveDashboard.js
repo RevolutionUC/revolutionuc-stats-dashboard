@@ -6,10 +6,17 @@ import BadgeFigureCard from '../cards/figures/BadgeFigureCard';
 import { useLiveData } from '../../providers/live-data.provider';
 
 const StyledRow = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  padding-bottom: 1rem;
-  padding-left: 15rem;
+  @media(max-width:1350px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 30rem;
+    // align-items: center;
+  }
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 1rem;
+    padding-left: 15rem;
 `;
 
 const getChartData = (data, key) => {
@@ -43,20 +50,22 @@ const LiveDashboard = function () {
 
   return (
     <div>
-      <StyledRow>
-        <BadgeFigureCard
-          LabelOne="Registrants"
-          ValueOne={stats.total}
-          LabelTwo="Last 24 hours"
-          ValueTwo={last24hrs}
-        />
-        <BadgeFigureCard
-          LabelOne="Lattice Users"
-          ValueOne={latticeStats.visible}
-          LabelTwo="Lattice Matches"
-          ValueTwo={latticeStats.matches}
-        />
-      </StyledRow>
+      <div>
+        <StyledRow>
+          <BadgeFigureCard
+            LabelOne="Registrants"
+            ValueOne={stats.total}
+            LabelTwo="Last 24 hours"
+            ValueTwo={last24hrs}
+          />
+          <BadgeFigureCard
+            LabelOne="Lattice Users"
+            ValueOne={latticeStats.visible}
+            LabelTwo="Lattice Matches"
+            ValueTwo={latticeStats.matches}
+          />
+        </StyledRow>
+      </div>
 
       <StyledRow>
         {ages.data.length ? (
