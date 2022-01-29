@@ -27,41 +27,40 @@ function Nav() {
                 .navigation{
                     width: 100%;
                     height: 50px;
-                    // color: red;
                 }
+                
                 
                 .navigation ul{
                     display:flex;
-                    flex-direction: column;
-                    float: left;
+                    flex-wrap: wrap;
+                    float: right;
                     margin: 0px;
                     padding: 0px;
-                    // overflow: hidden;
-                    font-size: 2rem;
+                    overflow: hidden;
                 }
                 .navigation ul li{
                     list-style-type: none;
-                    padding-right: 20rem;
+                    padding-right: 10px;
                 }
                 .hamburger{
-                    // display: none;
-                    position: fixed;
-                    right: 2rem;
+                    display: none;
                     z-index: 6;
                 } 
                 @media (max-width: 767px){
                   
                     .hamburger{
                         display:fixed;
+                        // position: fixed;
                         padding-top: 10px;
-                        // margin-left: 1px;
+                        margin-left: 15rem;
                         z-index: 6;
+                        // right: 10rem;
                     }
                 
                    
                     .navigation ul{
                         display: ${hamburgerOpen ? 'inline' : 'none'};
-                        // background-color: blue;
+                        background-color: blue;
                         height: 100vh;
                         width: 50vw;
                         margin-top: 50px;
