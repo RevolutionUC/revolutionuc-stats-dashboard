@@ -37,7 +37,7 @@ const LiveDashboard = function () {
   const registerDates = getChartData(stats, 'registerDate');
 
   const last24hrs = useMemo(
-    () => registrants.filter((r) => r.createdAt >= YESTERDAY).length,
+    () => registrants.filter((r) => new Date(r.createdAt) >= YESTERDAY).length,
     [registrants],
   );
 
