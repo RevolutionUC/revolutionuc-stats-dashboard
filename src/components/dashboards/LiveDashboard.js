@@ -40,7 +40,7 @@ const LiveDashboard = function () {
   );
 
   const last24hrs = useMemo(
-    () => registrants.filter((r) => r.createdAt >= YESTERDAY).length,
+    () => registrants.filter((r) => new Date(r.createdAt) >= YESTERDAY).length,
     [registrants],
   );
 
