@@ -34,7 +34,10 @@ const LiveDashboard = function () {
   const schools = getChartData(stats, 'school');
   const majors = getChartData(stats, 'major');
   const educationLevels = getChartData(stats, 'educationLevel');
-  const registerDates = getChartData(stats, 'registerDate');
+
+  const registerDates = Object.entries(stats['registerDate']).sort(
+    (a, b) => new Date(a[0]) - new Date(b[0]),
+  );
 
   const last24hrs = useMemo(
     () => registrants.filter((r) => r.createdAt >= YESTERDAY).length,
@@ -110,14 +113,14 @@ const LiveDashboard = function () {
       </StyledRow>
 
       <StyledRow>
-        {registerDates.data.length ? (
+        {registerDates.length ? (
           <LineChartCard
             cardTitle="Registered on"
-            labelData={registerDates.labels}
+            labelData={registerDates.map(([key]) => key)}
             seriesData={[
               {
                 name: 'Registrants',
-                data: registerDates.data,
+                data: registerDates.map(([, value]) => value),
               },
             ]}
           />
